@@ -1,0 +1,49 @@
+
+<div class="print-heading">
+        <h2 class="text-center">Stock Balance</h2>
+        <h2 class="text-center">From {%= frappe.datetime.str_to_user(filters.from_date) %} To {%= frappe.datetime.str_to_user(filters.to_date) %} </h2>
+</div>
+<table class="table table-bordered">
+        <thead>
+                <tr>
+                        <th style="width: 3%; text-align: center;" rowspan="2">S No</th>
+                        <th style="width: 8%; text-align: center;" rowspan="2">Item Group</th>
+                        <th style="width: 12%; text-align: center;" rowspan="2">Item</th>
+                        <th style="width: 8%; text-align: center;" rowspan="2">Warehouse</th>
+                        <th style="width: 3%; text-align: center;" rowspan="2">UOM</th>
+                        <th style="width: 15%; text-align: center;" rowspan="1" colspan="2">Opening</th>
+                        <th style="width: 15%; text-align: center;" rowspan="1" colspan="2">In</th>
+                        <th style="width: 15%; text-align: center;" rowspan="1" colspan="2">Out</th>
+                        <th style="width: 15%; text-align: center;" rowspan="1" colspan="2">Balance</th>
+                </tr>
+                <tr>
+                        <th style="text-align: center;">Qty</th>
+                        <th style="text-align: center;">Value</th>
+                        <th style="text-align: center;">Qty</th>
+                        <th style="text-align: center;">Value</th>
+                        <th style="text-align: center;">Qty</th>
+                        <th style="text-align: center;">Value</th>
+                        <th style="text-align: center;">Qty</th>
+                        <th style="text-align: center;">Value</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for(let j=0, k=data.length; j<k; j++) { %}
+                <tr>
+                        <td>{%= j+1 %}</td>
+                        <td>{%= data[j]["item_group"] %}</td>
+                        <td>{%= data[j]["item_code"] %}</td>
+                        <td>{%= data[j]["warehouse"] %}</td>
+                        <td  style="text-align: center;">{%= data[j]["stock_uom"] %}</td>                        
+                        <td style="text-align: right;">{%= format_number(data[j]["opening_qty"], null, 2) %}</td>                        
+                        <td style="text-align: right;">{%= format_currency(data[j]["opening_val"]) %}</td>                        
+                        <td style="text-align: right;">{%= format_number(data[j]["in_qty"], null, 2) %}</td>                        
+                        <td style="text-align: right;">{%= format_currency(data[j]["in_val"]) %}</td>                        
+                        <td style="text-align: right;">{%= format_number(data[j]["out_qty"], null, 2) %}</td>                        
+                        <td style="text-align: right;">{%= format_currency(data[j]["out_val"]) %}</td>                        
+                        <td style="text-align: right;">{%= format_number(data[j]["bal_qty"], null, 2) %}</td>                        
+                        <td style="text-align: right;">{%= format_currency(data[j]["bal_val"]) %}</td>                   
+                </tr>
+                {% } %}
+        </tbody>
+</table>

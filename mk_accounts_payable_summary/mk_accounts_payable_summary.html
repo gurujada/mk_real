@@ -1,0 +1,49 @@
+<style>
+    .print-format {
+        padding: 4mm;
+        font-size: 8.0pt;
+    }
+    .print-format td {
+        vertical-align: middle !important;
+    }
+</style>
+
+<h2 class="text-center">{%= __("Accounts Payable Summary") %}</h2>
+<h4 class="text-center">
+    {% if (filters.supplier_group) { %}
+        {%= __("Supplier Group: ")%}  {%= filters.supplier_group %}
+    {% } %}
+</h4>
+<h4 class="text-center">{%= filters.company %}</h4>
+<h6 class="text-center">{%= __("As on Date: ")%} {%= filters.report_date %}</h6>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 15%">{%= __("Supplier Group") %}</th>
+            <th style="width: 15%">{%= __("Supplier") %}</th>
+            <th style="width: 10%">{%= __("Advance Amount") %}</th>
+            <th style="width: 10%">{%= __("Invoiced Amount") %}</th>
+            <th style="width: 10%">{%= __("Paid Amount") %}</th>
+            <th style="width: 10%">{%= __("Debit Note") %}</th>
+            <th style="width: 10%">{%= __("Outstanding Amount") %}</th>
+            <th style="width: 10%">{%= __("Overdue Amount") %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for(var i=0, l=data.length; i<l; i++) { %}
+            <tr>
+                <td>{%= data[i].supplier_group %}</td>
+                <td>{%= data[i].supplier %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].advance_amount) %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].invoiced_amount) %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].paid_amount) %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].debit_note) %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].outstanding_amount) %}</td>
+                <td style="text-align: right">{%= format_currency(data[i].overdue_amount) %}</td>
+            </tr>
+        {% } %}
+    </tbody>
+</table>
+
+<p class="text-right text-muted">Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>
