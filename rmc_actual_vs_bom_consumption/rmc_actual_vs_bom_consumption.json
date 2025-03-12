@@ -1,0 +1,61 @@
+{
+    "add_total_row": 1,
+    "creation": "2025-03-03 14:20:00.000000",
+    "disabled": 0,
+    "docstatus": 0,
+    "doctype": "Report",
+    "filters": [
+        {
+            "default": "DATEADD(NOW(), INTERVAL -30 DAY)",
+            "fieldname": "from_date",
+            "fieldtype": "Date",
+            "label": "From Date",
+            "mandatory": 1,
+            "wildcard_filter": 0
+        },
+        {
+            "default": "NOW()",
+            "fieldname": "to_date",
+            "fieldtype": "Date",
+            "label": "To Date", 
+            "mandatory": 1,
+            "wildcard_filter": 0
+        },
+        {
+            "fieldname": "rmc_grade",
+            "fieldtype": "Link",
+            "label": "RMC Grade",
+            "options": "Item",
+            "wildcard_filter": 0,
+            "get_query": {
+                "filters": {
+                    "item_group": "RMC"
+                }
+            }
+        }
+    ],
+    "idx": 0,
+    "is_standard": "Yes",
+    "javascript": null,
+    "json": null,
+    "modified": "2025-03-03 14:20:00.000000",
+    "modified_by": "Administrator",
+    "module": "Stock",
+    "name": "RMC Actual vs BOM Consumption",
+    "owner": "Administrator",
+    "prepared_report": 0,
+    "ref_doctype": "RMC Production Entry",
+    "report_name": "RMC Actual vs BOM Consumption",
+    "report_type": "Script Report",
+    "roles": [
+        {
+            "role": "Stock Manager"
+        },
+        {
+            "role": "Manufacturing Manager"
+        },
+        {
+            "role": "Manufacturing User"
+        }
+    ]
+}
